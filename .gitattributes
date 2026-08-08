@@ -1,0 +1,3 @@
+*.ifc -text
+*.pbix binary
+*.bcf binary
