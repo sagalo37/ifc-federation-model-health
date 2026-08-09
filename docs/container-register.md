@@ -28,14 +28,19 @@ standard set so rail, road and bridge are distinguishable rather than collapsed 
 
 ## Notes
 
-- All containers share the IfcProject name "ifc silly sample scene", which is what lets them federate.
+- All containers share the IfcProject name "ifc silly sample scene".
 - Spatial structure differs by container: storey-based in the building files, facility/facility-part in the infra files. Both valid in 4.3.
 - 1 element in 367 carries a property set.
-- IfcBuildingElementProxy in all nine containers, 21 instances. Building-Landscaping is 3 of 7.
+- IfcBuildingElementProxy in all nine containers, 21 instances. LND-0004 is 3 of 7.
+- Proxies split two ways: untyped placeholder geometry (Group#16-19, "underground - road", "underground - river") and deliberate coordination markers ("origin", "geo-reference", carrying the local coordination point and the map reference point). A blanket prohibition catches both.
 - Qtos only in ARC, STR and CBR. 32 of 367.
-- Infra-Road: 19 of 55 elements typed. All 20 IfcSurfaceFeature untyped. Every other container is at or near full type coverage.
+- CRD-0007: 36 of 55 elements untyped. Every other container is at or near full type coverage.
 - IfcEarthworksFill in the architectural container.
 - Element naming inconsistent within a single storey in ARC.
 - Rail count dominated by 66 repeated IfcTrackElement. Raw per-discipline counts are misleading.
-- Infra-Landscaping: 76 IfcGeographicElement, 21% of the whole federation.
+- LIN-0009: 76 IfcGeographicElement, 21% of the whole federation.
 - IfcElementAssembly present in six containers. Assemblies contain other elements, so counts overlap.
+- IFCELEMENT does not work as an IDS applicability facet. Abstract supertypes match nothing, so classes have to be enumerated.
+- IDS property facets take the measure type, not the quantity entity type. IFCLENGTHMEASURE, not IFCQUANTITYLENGTH.
+- Containment requirement written against IfcBuildingStorey matches nothing in seven of nine containers.
+- Clash test CBR against CRD, hard clash, 0 mm: 4 results, all overlapping geometry at the bridge/road interface. Modelling convention, not a coordination issue.
