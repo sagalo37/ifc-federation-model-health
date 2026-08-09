@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ids xmlns="http://standards.buildingsmart.org/IDS"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://standards.buildingsmart.org/IDS
+                         http://standards.buildingsmart.org/IDS/1.0/ids.xsd">
+  <info>
+    <title>PCERT federation information requirements</title>
+    <description>Proxy for an exchange information requirement. Demonstration only.</description>
+    <author>salvador@salvadorgl.com</author>
+    <date>2026-08-09</date>
+  </info>
+  <specifications>
+<specification name="Spatial containment" ifcVersion="IFC4X3_ADD2">
+      <applicability minOccurs="1" maxOccurs="unbounded">
+        <entity>
+          <name><simpleValue>IFCWALL</simpleValue></name>
+        </entity>
+      </applicability>
+      <requirements>
+        <partOf relation="IFCRELCONTAINEDINSPATIALSTRUCTURE">
+          <entity>
+            <name><simpleValue>IFCBUILDINGSTOREY</simpleValue></name>
+          </entity>
+        </partOf>
+      </requirements>
+    </specification>
+    <specification name="Proxy elements prohibited" ifcVersion="IFC4X3_ADD2">
+      <applicability minOccurs="0" maxOccurs="0">
+        <entity>
+          <name><simpleValue>IFCBUILDINGELEMENTPROXY</simpleValue></name>
+        </entity>
+      </applicability>
+      <requirements/>
+    </specification>
+    <specification name="Property set present" ifcVersion="IFC4X3_ADD2">
+      <applicability minOccurs="1" maxOccurs="unbounded">
+        <entity>
+          <name><simpleValue>IFCWALL</simpleValue></name>
+        </entity>
+      </applicability>
+      <requirements>
+        <property dataType="IFCLABEL">
+          <propertySet><simpleValue>Pset_WallCommon</simpleValue></propertySet>
+          <baseName><simpleValue>Reference</simpleValue></baseName>
+        </property>
+      </requirements>
+    </specification>
+    <specification name="Base quantities present" ifcVersion="IFC4X3_ADD2">
+      <applicability minOccurs="1" maxOccurs="unbounded">
+        <entity>
+          <name><simpleValue>IFCWALL</simpleValue></name>
+        </entity>
+      </applicability>
+      <requirements>
+        <property dataType="IFCLENGTHMEASURE">
+          <propertySet><simpleValue>Qto_WallBaseQuantities</simpleValue></propertySet>
+          <baseName><simpleValue>Length</simpleValue></baseName>
+        </property>
+      </requirements>
+    </specification>
+  </specifications>
+</ids>
