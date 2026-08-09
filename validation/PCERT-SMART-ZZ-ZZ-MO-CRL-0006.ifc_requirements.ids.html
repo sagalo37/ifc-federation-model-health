@@ -1,0 +1,942 @@
+<!--
+    IfcTester - IDS based model auditing
+    Copyright (C) 2022 Dion Moult <dion@thinkmoult.com>
+
+    This file is part of IfcTester.
+
+    IfcTester is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    IfcTester is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with IfcTester.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE html>
+<html lang=>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="foobaro">
+    <title></title>
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa|Inconsolata|Open+Sans&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green: #97cc64;
+            --light-green: #b6cca1;
+            --red: #fb5a3e;
+            --light-red: #fbb4a8;
+        }
+        body { font-family: 'Arial', sans-serif; padding: 10px 40px; }
+        section { padding: 15px; border-radius: 5px; border: 1px solid #eee; margin-bottom: 15px; }
+        section>h2 { margin-top: 0px; }
+        span.time { color: #999; font-style: italic; float: right; }
+        span.step-time { float: right; color: #555; font-size: 0.8em; font-style: italic; }
+        span.item { padding: 5px; border-radius: 5px; margin-right: 5px; border: 1px solid #eee; }
+        span.item.pass, span.item.fail { color: #FFF; font-weight: bold; border: 0px; }
+        p.fail { background-color: #fb5a3e; padding: 5px; border-radius: 5px; color: #fff; }
+        p.unspecified { background-color: #994f00; padding: 5px; border-radius: 5px; color: #fff; }
+        p.skipped { background-color: #8b8d8f; padding: 5px; border-radius: 5px; color: #fff; }
+        p.description { background-color: #eee; border-radius: 5px; padding: 20px; margin-left: auto; margin-right: auto; display: inline-block; font-weight: bold;}
+        li { padding: 10px; font-family: monospace; border-radius: 5px; margin-bottom: 5px; }
+        li.pass { background-color: var(--light-green); color: #333; }
+        li.fail { background-color: var(--light-red); color: #900; }
+        li.unspecified { background-color: #ffd37f; color: #a30; }
+        li.skipped { background-color: #f5f5f5; color: #333; }
+        li p { margin-bottom: 0px; }
+        footer { color: #999; font-size: 0.8em; }
+        header { text-align: center; }
+        hr { margin: 20px; margin-left: 0px; margin-right: 0px;  border: none; border-top: 1px solid #ccc; }
+        summary { display: flex; cursor: pointer; }
+        summary::-webkit-details-marker { display: none; }
+        * {box-sizing:border-box}
+        .container { width: 100%; background-color: #ddd; border-radius: 5px}
+        .percent { text-align: left; padding-top: 5px; padding-left: 5px; padding-bottom: 5px; color: white; border-radius: 5px; white-space: nowrap; }
+        .pass { background-color: var(--green); }
+        .fail { background-color: var(--red); }
+        table { width: 100%; border-spacing: 0; border-radius: 5px; margin-top: 10px; }
+        th, td { padding: 5px; color: #000; }
+        table.pass { border-bottom: 2px solid var(--green); }
+        table.fail { border-bottom: 2px solid var(--red); }
+        table thead>tr { font-weight: bold; color: #000; }
+        table.pass tbody tr { border-bottom: 1px solid var(--green); }
+        table.fail tbody tr { border-bottom: 1px solid var(--red); }
+        tbody tr:nth-child(odd) { background-color: rgba(1, 1, 1, 0.05); }
+        tbody tr:nth-child(even) { background-color: rgba(1, 1, 1, 0.1); }
+        tbody tr:hover { background-color: rgba(0, 0, 0, 0); }
+        div.info { float: left; width: 30%; }
+        div.results { float: left; width: calc(70% - 20px); margin-left: 20px; padding: 20px; border-radius: 5px; background-color: #fafafa; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>PCERT federation information requirements</h1>
+        <p><strong>PCERT-SMART-ZZ-ZZ-MO-CRL-0006.ifc<br />2026-08-09 14:36:18</strong></p>
+    </header>
+    <h2>Summary</h2>
+    <div class="container">
+        <div class="fail percent" style="width: 0%;">0%</div>
+    </div>
+    <p>
+        <span class="item fail">Fail</span>
+        <span class="item">
+            Specifications passed: <strong>0</strong> / <strong>4</strong>
+        </span>
+        <span class="item">
+            Requirements passed: <strong>0</strong> / <strong>3</strong>
+        </span>
+        <span class="item">
+            Checks passed: <strong>0</strong> / <strong>72</strong>
+        </span>
+    </p>
+    <hr>
+    <section class="specification" style="clear: both; overflow: hidden;">
+        <div class="info">
+            <h2>Spatial containment</h2>
+
+            <div class="container">
+                <div class="
+                
+                fail
+                percent" style="width: 100%;">N/A%</div>
+            </div>
+            <p>
+                <span class="item fail">Required: Fail</span>
+                <span class="item">
+                    Checks passed: <strong>0</strong> / <strong>0</strong>
+                </span>
+                <span class="item">
+                    Elements passed: <strong>0</strong> / <strong>0</strong>
+                </span>
+            </p>
+        </div>
+        <div class="results">
+            <p>
+                <strong>Applicability</strong>
+            </p>
+            <ul>
+                <li>All IFCWALL data</li>
+            </ul>
+            <p>
+                <strong>Requirements</strong>
+            </p>
+            <ol>
+                <li class="skipped">
+                    <details>
+                        <summary>
+                            An element must have an IFCRELCONTAINEDINSPATIALSTRUCTURE relationship with an IFCBUILDINGSTOREY
+                        </summary>
+ 
+                    </details>
+                </li>
+            </ol>
+        </div>
+    </section>
+    <section class="specification" style="clear: both; overflow: hidden;">
+        <div class="info">
+            <h2>Proxy elements prohibited</h2>
+
+            <div class="container">
+                <div class="
+                
+                fail
+                percent" style="width: 100%;">N/A%</div>
+            </div>
+            <p>
+                <span class="item fail">Prohibited: Fail</span>
+                <span class="item">
+                    Elements matched: <strong>1</strong>
+                </span>
+            </p>
+        </div>
+        <div class="results">
+            <p>
+                <strong>Applicability</strong>
+            </p>
+            <ul>
+                <li>All IFCBUILDINGELEMENTPROXY data</li>
+            </ul>
+            <table class="fail">
+                <thead>
+                    <tr>
+                        <th>Class</th>
+                        <th>PredefinedType</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>GlobalId</th>
+                        <th>Tag</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>IfcBuildingElementProxy</td>
+                        <td>origin</td>
+                        <td>geo-reference</td>
+                        <td>The reference point for transforming the local engineering coordinate system into the coordinate reference system of the underlying map.</td>
+                        <td>3Fit2Fad92zf2f6aWdJtF5</td>
+                        <td>454425.1032696</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <section class="specification" style="clear: both; overflow: hidden;">
+        <div class="info">
+            <h2>Base quantities present</h2>
+
+            <div class="container">
+                <div class="
+                
+                fail
+                percent" style="width: 100%;">N/A%</div>
+            </div>
+            <p>
+                <span class="item fail">Required: Fail</span>
+                <span class="item">
+                    Checks passed: <strong>0</strong> / <strong>0</strong>
+                </span>
+                <span class="item">
+                    Elements passed: <strong>0</strong> / <strong>0</strong>
+                </span>
+            </p>
+        </div>
+        <div class="results">
+            <p>
+                <strong>Applicability</strong>
+            </p>
+            <ul>
+                <li>All IFCWALL data</li>
+            </ul>
+            <p>
+                <strong>Requirements</strong>
+            </p>
+            <ol>
+                <li class="skipped">
+                    <details>
+                        <summary>
+                            Length data shall be provided in the dataset Qto_WallBaseQuantities
+                        </summary>
+ 
+                    </details>
+                </li>
+            </ol>
+        </div>
+    </section>
+    <section class="specification" style="clear: both; overflow: hidden;">
+        <div class="info">
+            <h2>Property set present</h2>
+
+            <div class="container">
+                <div class="
+                
+                fail
+                percent" style="width: 0%;">0%</div>
+            </div>
+            <p>
+                <span class="item fail">Required: Fail</span>
+                <span class="item">
+                    Checks passed: <strong>0</strong> / <strong>72</strong>
+                </span>
+                <span class="item">
+                    Elements passed: <strong>0</strong> / <strong>72</strong>
+                </span>
+            </p>
+        </div>
+        <div class="results">
+            <p>
+                <strong>Applicability</strong>
+            </p>
+            <ul>
+                <li>All {&#x27;enumeration&#x27;: [&#x27;IFCWALL&#x27;, &#x27;IFCSLAB&#x27;, &#x27;IFCBEAM&#x27;, &#x27;IFCCOLUMN&#x27;, &#x27;IFCFOOTING&#x27;, &#x27;IFCROOF&#x27;, &#x27;IFCMEMBER&#x27;, &#x27;IFCRAILING&#x27;, &#x27;IFCPIPESEGMENT&#x27;, &#x27;IFCRAIL&#x27;, &#x27;IFCTRACKELEMENT&#x27;, &#x27;IFCCOURSE&#x27;, &#x27;IFCEARTHWORKSFILL&#x27;, &#x27;IFCSURFACEFEATURE&#x27;]} data</li>
+            </ul>
+            <p>
+                <strong>Requirements</strong>
+            </p>
+            <ol>
+                <li class="fail">
+                    <details>
+                        <summary>
+                            Reference data shall be provided in the dataset Pset_ElementCommon
+                        </summary>
+ 
+                        <table class="fail">
+                            <thead>
+                                <tr>
+                                    <th>Class</th>
+                                    <th>PredefinedType</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Warning</th>
+                                    <th>GlobalId</th>
+                                    <th>Tag</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>IfcRail</td>
+                                    <td>RAIL</td>
+                                    <td>rail</td>
+                                    <td>Strong rails, guiding trains safely along their path.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>3Ixq0AlaX2PR0EdMfWL49i</td>
+                                    <td>454425.1027894.2183506.2042690.955698</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcRail</td>
+                                    <td>RAIL</td>
+                                    <td>rail</td>
+                                    <td>Strong rails, guiding trains safely along their path.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>0gOEB3nvP8w8b2x7dkCurB</td>
+                                    <td>454425.1027894.2183506.2042690.955697</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcRail</td>
+                                    <td>RAIL</td>
+                                    <td>rail</td>
+                                    <td>Strong rails, guiding trains safely along their path.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>14O93KCH5CcwgIvHrgZEXj</td>
+                                    <td>454425.1027895.956002.2042690.955698</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcRail</td>
+                                    <td>RAIL</td>
+                                    <td>rail</td>
+                                    <td>Strong rails, guiding trains safely along their path.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>2$czTi6GrAHxd14aD6Qmmc</td>
+                                    <td>454425.1027895.956002.2042690.955697</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>0mApyqgbP3kwWGcMHpBgdC</td>
+                                    <td>454425.1027894.2183506.2042690.955696</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>1gG3H$M4nC18HrcjbZfxcQ</td>
+                                    <td>454425.1027894.2183506.2042690.955703</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>2pFyoP4czDyPD7YSYV0g1I</td>
+                                    <td>454425.1027894.2183506.2042690.955704</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>0LmYrpL31BLxBAY291UUPV</td>
+                                    <td>454425.1027894.2183506.2042690.955705</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>3CF5zUVrXC$xgrsKXU$XAx</td>
+                                    <td>454425.1027894.2183506.2042690.955706</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>1jPuNq3399wwsfi63CaYtQ</td>
+                                    <td>454425.1027894.2183506.2042690.955707</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>2hC6KuMWz8T8p3DKcB74Nr</td>
+                                    <td>454425.1027894.2183506.2042690.955708</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>3ooxVTKoDDyAfZgN27B0Xt</td>
+                                    <td>454425.1027894.2183506.2042690.955709</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>3QRjVXoH17pvJxTHfLfGTz</td>
+                                    <td>454425.1027894.2183506.2042690.955710</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>1A14NvUhv2_wMj4mxmA7o0</td>
+                                    <td>454425.1027894.2183506.2042690.955711</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>0rTKpqwfH8ZvpESUY9mK0D</td>
+                                    <td>454425.1027894.2183506.2042690.955712</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>0bjxY5edf3ORsHsGFLUXnG</td>
+                                    <td>454425.1027894.2183506.2042690.955713</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>1p7IOkE9j9cwFyx4_vQUH$</td>
+                                    <td>454425.1027894.2183506.2042690.955714</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>0X2A_iiNzCc9sTeIrZyf9i</td>
+                                    <td>454425.1027894.2183506.2042690.955715</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>240DDX4Zv7ZRBebISw7amg</td>
+                                    <td>454425.1027894.2183506.2042690.955716</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>0SNcQbysLA08i6DTmPfdl$</td>
+                                    <td>454425.1027894.2183506.2042690.955717</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>1KgKJls3H9_u5Xd8c_HS7x</td>
+                                    <td>454425.1027894.2183506.2042690.955718</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>3b4O_fC9b728g3ldIvq6l2</td>
+                                    <td>454425.1027894.2183506.2042690.955719</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>20FBV5Tcj4yeFIkA119U20</td>
+                                    <td>454425.1027894.2183506.2042690.955720</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>1J8_j1nRDDfQQXFNU6jh1C</td>
+                                    <td>454425.1027894.2183506.2042690.955721</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>3jf03qOPH8oftXrH9IVkSa</td>
+                                    <td>454425.1027894.2183506.2042690.955722</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>2SCufMLTX7xQpijUrlgbDl</td>
+                                    <td>454425.1027894.2183506.2042690.955723</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>3BWkltsLT1kg_mUdP5q1Mv</td>
+                                    <td>454425.1027894.2183506.2042690.955724</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>0NjD4eL$13aPRyMEU8_Pur</td>
+                                    <td>454425.1027894.2183506.2042690.955725</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>0y55PkXXrAfxfuCFlVHxdf</td>
+                                    <td>454425.1027894.2183506.2042690.955726</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>1DlyW6vE1AFxD298O5l6sU</td>
+                                    <td>454425.1027894.2183506.2042690.955727</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>3yQtEGRLLAuwH0EvMJUSpX</td>
+                                    <td>454425.1027894.2183506.2042690.955728</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>2mQystxXrBl9nXWHqw58UW</td>
+                                    <td>454425.1027894.2183506.2042690.955729</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>2aNIR9HKD6lPzpHEoqth$b</td>
+                                    <td>454425.1027894.2183506.2042690.955730</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>2dSJ10Gxv9AR$_DmiMCtSq</td>
+                                    <td>454425.1027894.2183506.2042690.955731</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>225m02QHv3mhkTXinDpbnC</td>
+                                    <td>454425.1027894.2183506.2042690.955732</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>2HKuqlX7D0UQ6Ws7xU2Tpj</td>
+                                    <td>454425.1027894.2183506.2042690.955733</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>3615LYIInAVAKMJ7MpZ30R</td>
+                                    <td>454425.1027894.2183506.2042690.955734</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>2G0mFQhK929u_6An0lBNTZ</td>
+                                    <td>454425.1027895.956002.2042690.955696</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>1Hb6PCblD2ZuvhFdwzUotD</td>
+                                    <td>454425.1027895.956002.2042690.955703</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>15Q88nz595tP5ei3_pAQgO</td>
+                                    <td>454425.1027895.956002.2042690.955704</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>0JskQH3CjFQwvVhALUzox1</td>
+                                    <td>454425.1027895.956002.2042690.955705</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>1dc6DrbT90UA9pg9Z3rs4Z</td>
+                                    <td>454425.1027895.956002.2042690.955706</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>3eijguL1P9Nfvjs$Xpqdpu</td>
+                                    <td>454425.1027895.956002.2042690.955707</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>2xpMIc_0H2iuAG4BcTIFAT</td>
+                                    <td>454425.1027895.956002.2042690.955708</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>3qB7jvnzzCdhkb6SWzwgkc</td>
+                                    <td>454425.1027895.956002.2042690.955709</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>2vvVUDLqjBxRXxfI3C2q$r</td>
+                                    <td>454425.1027895.956002.2042690.955710</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>0v0w97H9D0vhXlZ8fsd1v_</td>
+                                    <td>454425.1027895.956002.2042690.955711</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>1j_ofp0_jDkQibnMsl$T_a</td>
+                                    <td>454425.1027895.956002.2042690.955712</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>3a7SkZ5Ar1xxhiVrdbOBRI</td>
+                                    <td>454425.1027895.956002.2042690.955713</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>1VhaT3K8H2lPdXb8NqCPZs</td>
+                                    <td>454425.1027895.956002.2042690.955714</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>0W$6qwCif1ePgGk6Sh$apd</td>
+                                    <td>454425.1027895.956002.2042690.955715</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>0BRh6j4b90nA0leMHsST_R</td>
+                                    <td>454425.1027895.956002.2042690.955716</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>0xoA7NQgD7lRlwTspYVfko</td>
+                                    <td>454425.1027895.956002.2042690.955717</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>0l0npIYpb0jwRcuQumw8GS</td>
+                                    <td>454425.1027895.956002.2042690.955718</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>28xYqtZ4vF0RoQVLMjR04U</td>
+                                    <td>454425.1027895.956002.2042690.955719</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>1qU3xMaZz2Av3pVOxzfZKW</td>
+                                    <td>454425.1027895.956002.2042690.955720</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>30nYk7ZUj7BeZTiiCyQzG3</td>
+                                    <td>454425.1027895.956002.2042690.955721</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>2fLDxlSJ5658K2aKlEUuO$</td>
+                                    <td>454425.1027895.956002.2042690.955722</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>3A9NNgob1BBODyEmbQaSNY</td>
+                                    <td>454425.1027895.956002.2042690.955723</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>0KPcs1y3j3YezA6xslC0pO</td>
+                                    <td>454425.1027895.956002.2042690.955724</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>3qFv979eH6S8MEUxE$yKtu</td>
+                                    <td>454425.1027895.956002.2042690.955725</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>2ea9NtvwjBGfaygNYjxAxe</td>
+                                    <td>454425.1027895.956002.2042690.955726</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>1TPGJrtGD5GuYtVCcv8tWE</td>
+                                    <td>454425.1027895.956002.2042690.955727</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>3PcU1ZuFj2Aev0J8hzhHvy</td>
+                                    <td>454425.1027895.956002.2042690.955728</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>0dRF_swOj9Z89ywNzIYxlz</td>
+                                    <td>454425.1027895.956002.2042690.955729</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>1XcDIiNyv9uuTZP4jDMfO$</td>
+                                    <td>454425.1027895.956002.2042690.955730</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>2UXPKrUxb1NPLYxy3$uCcp</td>
+                                    <td>454425.1027895.956002.2042690.955731</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>1o4sQbZYD7EfuX2weAoHYD</td>
+                                    <td>454425.1027895.956002.2042690.955732</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>1_XScBOSD3h8oErFHWZl76</td>
+                                    <td>454425.1027895.956002.2042690.955733</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcTrackElement</td>
+                                    <td>SLEEPER</td>
+                                    <td>sleeper wood</td>
+                                    <td>Durable wooden sleepers, supporting the railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>3_fqSk$jXDlgUncZWfXZMS</td>
+                                    <td>454425.1027895.956002.2042690.955734</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcCourse</td>
+                                    <td>BALLASTBED</td>
+                                    <td>ballastbed</td>
+                                    <td>A sturdy ballast bed, providing a stable base for railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>2VSzSEJibEmQCf1lSBr3vL</td>
+                                    <td>454425.1027894.2183506.2042690.955699</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcCourse</td>
+                                    <td>BALLASTBED</td>
+                                    <td>ballastbed</td>
+                                    <td>A sturdy ballast bed, providing a stable base for railway tracks.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>29NeQDl9r0RPTH7F43W1He</td>
+                                    <td>454425.1027895.956002.2042690.955699</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </details>
+                </li>
+            </ol>
+        </div>
+    </section>
+    <hr>
+    <footer>
+        <p>
+            Report by the <a href="https://bonsaibim.org/">Bonsai</a> and <a href="http://ifcopenshell.org/">IfcOpenShell</a>.
+        </p>
+    </footer>
+</body>
+</html>

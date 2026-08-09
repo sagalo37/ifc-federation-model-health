@@ -1,0 +1,762 @@
+<!--
+    IfcTester - IDS based model auditing
+    Copyright (C) 2022 Dion Moult <dion@thinkmoult.com>
+
+    This file is part of IfcTester.
+
+    IfcTester is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    IfcTester is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with IfcTester.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE html>
+<html lang=>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="foobaro">
+    <title></title>
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa|Inconsolata|Open+Sans&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green: #97cc64;
+            --light-green: #b6cca1;
+            --red: #fb5a3e;
+            --light-red: #fbb4a8;
+        }
+        body { font-family: 'Arial', sans-serif; padding: 10px 40px; }
+        section { padding: 15px; border-radius: 5px; border: 1px solid #eee; margin-bottom: 15px; }
+        section>h2 { margin-top: 0px; }
+        span.time { color: #999; font-style: italic; float: right; }
+        span.step-time { float: right; color: #555; font-size: 0.8em; font-style: italic; }
+        span.item { padding: 5px; border-radius: 5px; margin-right: 5px; border: 1px solid #eee; }
+        span.item.pass, span.item.fail { color: #FFF; font-weight: bold; border: 0px; }
+        p.fail { background-color: #fb5a3e; padding: 5px; border-radius: 5px; color: #fff; }
+        p.unspecified { background-color: #994f00; padding: 5px; border-radius: 5px; color: #fff; }
+        p.skipped { background-color: #8b8d8f; padding: 5px; border-radius: 5px; color: #fff; }
+        p.description { background-color: #eee; border-radius: 5px; padding: 20px; margin-left: auto; margin-right: auto; display: inline-block; font-weight: bold;}
+        li { padding: 10px; font-family: monospace; border-radius: 5px; margin-bottom: 5px; }
+        li.pass { background-color: var(--light-green); color: #333; }
+        li.fail { background-color: var(--light-red); color: #900; }
+        li.unspecified { background-color: #ffd37f; color: #a30; }
+        li.skipped { background-color: #f5f5f5; color: #333; }
+        li p { margin-bottom: 0px; }
+        footer { color: #999; font-size: 0.8em; }
+        header { text-align: center; }
+        hr { margin: 20px; margin-left: 0px; margin-right: 0px;  border: none; border-top: 1px solid #ccc; }
+        summary { display: flex; cursor: pointer; }
+        summary::-webkit-details-marker { display: none; }
+        * {box-sizing:border-box}
+        .container { width: 100%; background-color: #ddd; border-radius: 5px}
+        .percent { text-align: left; padding-top: 5px; padding-left: 5px; padding-bottom: 5px; color: white; border-radius: 5px; white-space: nowrap; }
+        .pass { background-color: var(--green); }
+        .fail { background-color: var(--red); }
+        table { width: 100%; border-spacing: 0; border-radius: 5px; margin-top: 10px; }
+        th, td { padding: 5px; color: #000; }
+        table.pass { border-bottom: 2px solid var(--green); }
+        table.fail { border-bottom: 2px solid var(--red); }
+        table thead>tr { font-weight: bold; color: #000; }
+        table.pass tbody tr { border-bottom: 1px solid var(--green); }
+        table.fail tbody tr { border-bottom: 1px solid var(--red); }
+        tbody tr:nth-child(odd) { background-color: rgba(1, 1, 1, 0.05); }
+        tbody tr:nth-child(even) { background-color: rgba(1, 1, 1, 0.1); }
+        tbody tr:hover { background-color: rgba(0, 0, 0, 0); }
+        div.info { float: left; width: 30%; }
+        div.results { float: left; width: calc(70% - 20px); margin-left: 20px; padding: 20px; border-radius: 5px; background-color: #fafafa; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>PCERT federation information requirements</h1>
+        <p><strong>PCERT-SMART-ZZ-ZZ-MO-CRD-0007.ifc<br />2026-08-09 14:36:18</strong></p>
+    </header>
+    <h2>Summary</h2>
+    <div class="container">
+        <div class="fail percent" style="width: 0%;">0%</div>
+    </div>
+    <p>
+        <span class="item fail">Fail</span>
+        <span class="item">
+            Specifications passed: <strong>0</strong> / <strong>4</strong>
+        </span>
+        <span class="item">
+            Requirements passed: <strong>0</strong> / <strong>3</strong>
+        </span>
+        <span class="item">
+            Checks passed: <strong>0</strong> / <strong>52</strong>
+        </span>
+    </p>
+    <hr>
+    <section class="specification" style="clear: both; overflow: hidden;">
+        <div class="info">
+            <h2>Spatial containment</h2>
+
+            <div class="container">
+                <div class="
+                
+                fail
+                percent" style="width: 100%;">N/A%</div>
+            </div>
+            <p>
+                <span class="item fail">Required: Fail</span>
+                <span class="item">
+                    Checks passed: <strong>0</strong> / <strong>0</strong>
+                </span>
+                <span class="item">
+                    Elements passed: <strong>0</strong> / <strong>0</strong>
+                </span>
+            </p>
+        </div>
+        <div class="results">
+            <p>
+                <strong>Applicability</strong>
+            </p>
+            <ul>
+                <li>All IFCWALL data</li>
+            </ul>
+            <p>
+                <strong>Requirements</strong>
+            </p>
+            <ol>
+                <li class="skipped">
+                    <details>
+                        <summary>
+                            An element must have an IFCRELCONTAINEDINSPATIALSTRUCTURE relationship with an IFCBUILDINGSTOREY
+                        </summary>
+ 
+                    </details>
+                </li>
+            </ol>
+        </div>
+    </section>
+    <section class="specification" style="clear: both; overflow: hidden;">
+        <div class="info">
+            <h2>Proxy elements prohibited</h2>
+
+            <div class="container">
+                <div class="
+                
+                fail
+                percent" style="width: 100%;">N/A%</div>
+            </div>
+            <p>
+                <span class="item fail">Prohibited: Fail</span>
+                <span class="item">
+                    Elements matched: <strong>1</strong>
+                </span>
+            </p>
+        </div>
+        <div class="results">
+            <p>
+                <strong>Applicability</strong>
+            </p>
+            <ul>
+                <li>All IFCBUILDINGELEMENTPROXY data</li>
+            </ul>
+            <table class="fail">
+                <thead>
+                    <tr>
+                        <th>Class</th>
+                        <th>PredefinedType</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>GlobalId</th>
+                        <th>Tag</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>IfcBuildingElementProxy</td>
+                        <td>origin</td>
+                        <td>geo-reference</td>
+                        <td>The reference point for transforming the local engineering coordinate system into the coordinate reference system of the underlying map.</td>
+                        <td>3Fit2Fad92zf2f6aWdJtF5</td>
+                        <td>454425.1032696</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <section class="specification" style="clear: both; overflow: hidden;">
+        <div class="info">
+            <h2>Base quantities present</h2>
+
+            <div class="container">
+                <div class="
+                
+                fail
+                percent" style="width: 100%;">N/A%</div>
+            </div>
+            <p>
+                <span class="item fail">Required: Fail</span>
+                <span class="item">
+                    Checks passed: <strong>0</strong> / <strong>0</strong>
+                </span>
+                <span class="item">
+                    Elements passed: <strong>0</strong> / <strong>0</strong>
+                </span>
+            </p>
+        </div>
+        <div class="results">
+            <p>
+                <strong>Applicability</strong>
+            </p>
+            <ul>
+                <li>All IFCWALL data</li>
+            </ul>
+            <p>
+                <strong>Requirements</strong>
+            </p>
+            <ol>
+                <li class="skipped">
+                    <details>
+                        <summary>
+                            Length data shall be provided in the dataset Qto_WallBaseQuantities
+                        </summary>
+ 
+                    </details>
+                </li>
+            </ol>
+        </div>
+    </section>
+    <section class="specification" style="clear: both; overflow: hidden;">
+        <div class="info">
+            <h2>Property set present</h2>
+
+            <div class="container">
+                <div class="
+                
+                fail
+                percent" style="width: 0%;">0%</div>
+            </div>
+            <p>
+                <span class="item fail">Required: Fail</span>
+                <span class="item">
+                    Checks passed: <strong>0</strong> / <strong>52</strong>
+                </span>
+                <span class="item">
+                    Elements passed: <strong>0</strong> / <strong>52</strong>
+                </span>
+            </p>
+        </div>
+        <div class="results">
+            <p>
+                <strong>Applicability</strong>
+            </p>
+            <ul>
+                <li>All {&#x27;enumeration&#x27;: [&#x27;IFCWALL&#x27;, &#x27;IFCSLAB&#x27;, &#x27;IFCBEAM&#x27;, &#x27;IFCCOLUMN&#x27;, &#x27;IFCFOOTING&#x27;, &#x27;IFCROOF&#x27;, &#x27;IFCMEMBER&#x27;, &#x27;IFCRAILING&#x27;, &#x27;IFCPIPESEGMENT&#x27;, &#x27;IFCRAIL&#x27;, &#x27;IFCTRACKELEMENT&#x27;, &#x27;IFCCOURSE&#x27;, &#x27;IFCEARTHWORKSFILL&#x27;, &#x27;IFCSURFACEFEATURE&#x27;]} data</li>
+            </ul>
+            <p>
+                <strong>Requirements</strong>
+            </p>
+            <ol>
+                <li class="fail">
+                    <details>
+                        <summary>
+                            Reference data shall be provided in the dataset Pset_ElementCommon
+                        </summary>
+ 
+                        <table class="fail">
+                            <thead>
+                                <tr>
+                                    <th>Class</th>
+                                    <th>PredefinedType</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Warning</th>
+                                    <th>GlobalId</th>
+                                    <th>Tag</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>IfcEarthworksFill</td>
+                                    <td>SUBGRADE</td>
+                                    <td>road - parking - subgrade</td>
+                                    <td>A stable subgrade, forming the foundation of the parking area.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>0v1ddg6Y12hvvQhtW6MY3h</td>
+                                    <td>454425.1027892.955978.953073.940313.1922262</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcEarthworksFill</td>
+                                    <td>SUBGRADEBED</td>
+                                    <td>road parking - base course</td>
+                                    <td>A solid base course, providing support for the parking area surface.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>21looXrNb6n9dVVqZ0afH3</td>
+                                    <td>454425.1027892.955978.953073.940313.1922263</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcEarthworksFill</td>
+                                    <td>SUBGRADE</td>
+                                    <td>road - subgrade</td>
+                                    <td>A stable subgrade, forming the foundation of the road.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>25_RTYQg9CWPpSeXsVQXRz</td>
+                                    <td>454425.1027892.955978.953073.1922257.937651</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcEarthworksFill</td>
+                                    <td>SUBGRADEBED</td>
+                                    <td>road - base course</td>
+                                    <td>A solid base course, providing support for the road surface.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>1zA0UQopr71wWPFRVqk8vb</td>
+                                    <td>454425.1027892.955978.953073.1922257.937652</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcEarthworksFill</td>
+                                    <td>SUBGRADE</td>
+                                    <td>road - parking - subgrade</td>
+                                    <td>A stable subgrade, forming the foundation of the parking area.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>3IUYm3Tt58BvzwcxEk6ARA</td>
+                                    <td>454425.1027892.955978.1922250.940313.1922262</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcEarthworksFill</td>
+                                    <td>SUBGRADEBED</td>
+                                    <td>road parking - base course</td>
+                                    <td>A solid base course, providing support for the parking area surface.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>3XzlKA5bz0efC2no0GJY02</td>
+                                    <td>454425.1027892.955978.1922250.940313.1922263</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcEarthworksFill</td>
+                                    <td>SUBGRADE</td>
+                                    <td>road - subgrade</td>
+                                    <td>A stable subgrade, forming the foundation of the road.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>3l2i$KGMz4I87INjjdXvqG</td>
+                                    <td>454425.1027892.955978.1922250.1922257.937651</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcEarthworksFill</td>
+                                    <td>SUBGRADEBED</td>
+                                    <td>road - base course</td>
+                                    <td>A solid base course, providing support for the road surface.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>23fuLywRn2yQjhdXt_DTEx</td>
+                                    <td>454425.1027892.955978.1922250.1922257.937652</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcEarthworksFill</td>
+                                    <td>SUBGRADEBED</td>
+                                    <td>road base course - bridge road</td>
+                                    <td>A solid base course, providing support for the bridge road surface.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>3nUgJwuKjBSgKNVqnDReQ_</td>
+                                    <td>454425.1027893.1882581.1882584.953129.940411</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcEarthworksFill</td>
+                                    <td>SUBGRADE</td>
+                                    <td>road subgrade - bridge road</td>
+                                    <td>A stable subgrade, forming the foundation of the bridge road.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>24yB027vXAnwvB5wEFTdUW</td>
+                                    <td>454425.1027893.1882581.1882584.953129.940414</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcEarthworksFill</td>
+                                    <td>SUBGRADEBED</td>
+                                    <td>road base course - bridge road</td>
+                                    <td>A solid base course, providing support for the bridge road surface.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>2gurTQSkD1_htHRFmtcbL_</td>
+                                    <td>454425.1027893.1886558.1882584.953129.940411</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcEarthworksFill</td>
+                                    <td>SUBGRADE</td>
+                                    <td>road subgrade - bridge road</td>
+                                    <td>A stable subgrade, forming the foundation of the bridge road.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>2Lcv7v7Y9CDgeVSxtOixa_</td>
+                                    <td>454425.1027893.1886558.1882584.953129.940414</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcEarthworksFill</td>
+                                    <td>SUBGRADE</td>
+                                    <td>road - subgrade</td>
+                                    <td>A stable subgrade, forming the foundation of the road.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>1URig8FeLBeR9AdMrx_PFb</td>
+                                    <td>454425.1027895.1925011.1918136.1918138.1918146</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcEarthworksFill</td>
+                                    <td>SUBGRADEBED</td>
+                                    <td>road - base course</td>
+                                    <td>A solid base course, providing support for the road surface.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>34susoRVr6zwuxR_H7WjJP</td>
+                                    <td>454425.1027895.1925011.1918136.1918138.1918147</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcEarthworksFill</td>
+                                    <td>SUBGRADE</td>
+                                    <td>road - subgrade</td>
+                                    <td>A stable subgrade, forming the foundation of the road.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>1IhMwsHkj23Pk9puusHUBF</td>
+                                    <td>454425.1918123.1918126.1918136.1918138.1918146</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcEarthworksFill</td>
+                                    <td>SUBGRADEBED</td>
+                                    <td>road - base course</td>
+                                    <td>A solid base course, providing support for the road surface.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>0JHBQuEiP0nvPYpJMf4bmS</td>
+                                    <td>454425.1918123.1918126.1918136.1918138.1918147</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcCourse</td>
+                                    <td>CORE</td>
+                                    <td>asphalt binder course - road - parking</td>
+                                    <td>A durable asphalt binder course, forming a key layer of the parking area.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>37h0T9Qob7Mw1PFsR1kVP7</td>
+                                    <td>454425.1027892.955978.953073.940313.1922259</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcCourse</td>
+                                    <td>PAVEMENT</td>
+                                    <td>road - parking - asphalt surface course</td>
+                                    <td>A smooth asphalt surface, providing a durable driving layer in the parking area.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>2Z1Tk3YUj4bfBY5kB$H6XD</td>
+                                    <td>454425.1027892.955978.953073.940313.1922260</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcCourse</td>
+                                    <td>CORE</td>
+                                    <td>road - asphalt binder course</td>
+                                    <td>A durable asphalt binder course, forming a key layer of the road.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>1UiPSFcDjErxwCT65xLh1S</td>
+                                    <td>454425.1027892.955978.953073.1922257.937648</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcCourse</td>
+                                    <td>PAVEMENT</td>
+                                    <td>road - asphalt surface course</td>
+                                    <td>A smooth asphalt surface, providing a durable driving layer.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>0bOiufAU17JvMAqTkdbCGK</td>
+                                    <td>454425.1027892.955978.953073.1922257.937649</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcCourse</td>
+                                    <td>CORE</td>
+                                    <td>asphalt binder course - road - parking</td>
+                                    <td>A durable asphalt binder course, forming a key layer of the parking area.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>3n9r1K2N1DBRveA6CMqp_q</td>
+                                    <td>454425.1027892.955978.1922250.940313.1922259</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcCourse</td>
+                                    <td>PAVEMENT</td>
+                                    <td>road - parking - asphalt surface course</td>
+                                    <td>A smooth asphalt surface, providing a durable driving layer in the parking area.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>122iIwdi92Nu19w41eQ8OO</td>
+                                    <td>454425.1027892.955978.1922250.940313.1922260</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcCourse</td>
+                                    <td>CORE</td>
+                                    <td>road - asphalt binder course</td>
+                                    <td>A durable asphalt binder course, forming a key layer of the road.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>1EBv$nhkP16QpDbPgakj0R</td>
+                                    <td>454425.1027892.955978.1922250.1922257.937648</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcCourse</td>
+                                    <td>PAVEMENT</td>
+                                    <td>road - asphalt surface course</td>
+                                    <td>A smooth asphalt surface, providing a durable driving layer.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>29INDGxC98WgiF2$uaWE$G</td>
+                                    <td>454425.1027892.955978.1922250.1922257.937649</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcCourse</td>
+                                    <td>CORE</td>
+                                    <td>bridge road - road asphalt binder course</td>
+                                    <td>A durable asphalt binder course, forming a key layer of the bridge road.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>2B7GjowjDAyvkWvj3mcysp</td>
+                                    <td>454425.1027893.1882581.1882584.953129.940413</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcCourse</td>
+                                    <td>PAVEMENT</td>
+                                    <td>road asphalt surface course - bridge road</td>
+                                    <td>A smooth asphalt surface, providing a durable driving layer on the bridge road.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>0GfyK6YKbBBOLGVolBxAx4</td>
+                                    <td>454425.1027893.1882581.1882584.953129.940412</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcCourse</td>
+                                    <td>CORE</td>
+                                    <td>bridge road - road asphalt binder course</td>
+                                    <td>A durable asphalt binder course, forming a key layer of the bridge road.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>2CFlp691nEVAN$xmwmq4NQ</td>
+                                    <td>454425.1027893.1886558.1882584.953129.940413</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcCourse</td>
+                                    <td>PAVEMENT</td>
+                                    <td>road asphalt surface course - bridge road</td>
+                                    <td>A smooth asphalt surface, providing a durable driving layer on the bridge road.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>3PGg5TW8D94u9cNHoKU9ai</td>
+                                    <td>454425.1027893.1886558.1882584.953129.940412</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcCourse</td>
+                                    <td>CORE</td>
+                                    <td>road - asphalt binder course</td>
+                                    <td>A durable asphalt binder course, forming a key layer of the road.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>0WFaAjgxT8whuM_s0GDVop</td>
+                                    <td>454425.1027895.1925011.1918136.1918138.1918143</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcCourse</td>
+                                    <td>PAVEMENT</td>
+                                    <td>road - asphalt surface course</td>
+                                    <td>A smooth asphalt surface, providing a durable driving layer.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>2perTo5I50_QVZloPyhq8F</td>
+                                    <td>454425.1027895.1925011.1918136.1918138.1918144</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcCourse</td>
+                                    <td>CORE</td>
+                                    <td>road - asphalt binder course</td>
+                                    <td>A durable asphalt binder course, forming a key layer of the road.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>1hIucSGDb5YfQIf0E4zTy_</td>
+                                    <td>454425.1918123.1918126.1918136.1918138.1918143</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcCourse</td>
+                                    <td>PAVEMENT</td>
+                                    <td>road - asphalt surface course</td>
+                                    <td>A smooth asphalt surface, providing a durable driving layer.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>2Hv0cNhjPCV8n4VnOiLlhy</td>
+                                    <td>454425.1918123.1918126.1918136.1918138.1918144</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcSurfaceFeature</td>
+                                    <td>LINEMARKING</td>
+                                    <td>road - line marking</td>
+                                    <td>Clear and precise line markings, guiding traffic safely.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>2E09k8p5j8Ie2cdShEa6y3</td>
+                                    <td>454425.1027892.955978.953073.1922257.937649.2051805</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcSurfaceFeature</td>
+                                    <td>LINEMARKING</td>
+                                    <td>road - line marking</td>
+                                    <td>Clear and precise line markings, guiding traffic safely.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>3oFdaVamzCehZnvL2DVyTv</td>
+                                    <td>454425.1027892.955978.953073.1922257.937649.2051907</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcSurfaceFeature</td>
+                                    <td>LINEMARKING</td>
+                                    <td>road - line marking</td>
+                                    <td>Clear and precise line markings, guiding traffic safely.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>22Oy65k6H6RQzyRYDT5O81</td>
+                                    <td>454425.1027892.955978.953073.1922257.937649.2051908</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcSurfaceFeature</td>
+                                    <td>LINEMARKING</td>
+                                    <td>road - line marking</td>
+                                    <td>Clear and precise line markings, guiding traffic safely.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>3nP$zLBVH1Yxs64yX$MtCU</td>
+                                    <td>454425.1027892.955978.953073.1922257.937649.2051909</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcSurfaceFeature</td>
+                                    <td>LINEMARKING</td>
+                                    <td>road - line marking</td>
+                                    <td>Clear and precise line markings, guiding traffic safely.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>3iK_B7RQX1A90d2SZn3haF</td>
+                                    <td>454425.1027892.955978.953073.1922257.937649.2051910</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcSurfaceFeature</td>
+                                    <td>LINEMARKING</td>
+                                    <td>road - line marking</td>
+                                    <td>Clear and precise line markings, guiding traffic safely.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>2k035JfqPANO_5sd1VjpMr</td>
+                                    <td>454425.1027892.955978.1922250.1922257.937649.2051805</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcSurfaceFeature</td>
+                                    <td>LINEMARKING</td>
+                                    <td>road - line marking</td>
+                                    <td>Clear and precise line markings, guiding traffic safely.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>2xFNEEiVXAoQ17T8KWBbr6</td>
+                                    <td>454425.1027892.955978.1922250.1922257.937649.2051907</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcSurfaceFeature</td>
+                                    <td>LINEMARKING</td>
+                                    <td>road - line marking</td>
+                                    <td>Clear and precise line markings, guiding traffic safely.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>3PBVDB_Gv65fD5rAR8Y2j0</td>
+                                    <td>454425.1027892.955978.1922250.1922257.937649.2051908</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcSurfaceFeature</td>
+                                    <td>LINEMARKING</td>
+                                    <td>road - line marking</td>
+                                    <td>Clear and precise line markings, guiding traffic safely.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>2ayNnO1Fn0kRTcnBmZ4Sgd</td>
+                                    <td>454425.1027892.955978.1922250.1922257.937649.2051909</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcSurfaceFeature</td>
+                                    <td>LINEMARKING</td>
+                                    <td>road - line marking</td>
+                                    <td>Clear and precise line markings, guiding traffic safely.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>1PLaDnWNP2WPtJ6K0kxgur</td>
+                                    <td>454425.1027892.955978.1922250.1922257.937649.2051910</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcSurfaceFeature</td>
+                                    <td>LINEMARKING</td>
+                                    <td>road - line marking</td>
+                                    <td>Clear and precise line markings, guiding traffic safely.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>2XfFRWwzD9qfMHjBFXzIXm</td>
+                                    <td>454425.1027895.1925011.1918136.1918138.1918144.2051805</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcSurfaceFeature</td>
+                                    <td>LINEMARKING</td>
+                                    <td>road - line marking</td>
+                                    <td>Clear and precise line markings, guiding traffic safely.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>3kgqjUM35B4wJgRMa9qRTs</td>
+                                    <td>454425.1027895.1925011.1918136.1918138.1918144.2051907</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcSurfaceFeature</td>
+                                    <td>LINEMARKING</td>
+                                    <td>road - line marking</td>
+                                    <td>Clear and precise line markings, guiding traffic safely.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>3YeZLOBOrEnv261fug3ZyX</td>
+                                    <td>454425.1027895.1925011.1918136.1918138.1918144.2051908</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcSurfaceFeature</td>
+                                    <td>LINEMARKING</td>
+                                    <td>road - line marking</td>
+                                    <td>Clear and precise line markings, guiding traffic safely.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>1iXLtViPXCCwrYVlnB19Ks</td>
+                                    <td>454425.1027895.1925011.1918136.1918138.1918144.2051909</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcSurfaceFeature</td>
+                                    <td>LINEMARKING</td>
+                                    <td>road - line marking</td>
+                                    <td>Clear and precise line markings, guiding traffic safely.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>2VDStrHxP5_9fajgO5lJMP</td>
+                                    <td>454425.1027895.1925011.1918136.1918138.1918144.2051910</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcSurfaceFeature</td>
+                                    <td>LINEMARKING</td>
+                                    <td>road - line marking</td>
+                                    <td>Clear and precise line markings, guiding traffic safely.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>3736_hvIzFCRBgB1NzaIAG</td>
+                                    <td>454425.1918123.1918126.1918136.1918138.1918144.2051805</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcSurfaceFeature</td>
+                                    <td>LINEMARKING</td>
+                                    <td>road - line marking</td>
+                                    <td>Clear and precise line markings, guiding traffic safely.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>1HY$KHGVb0Y9iLwHsRZfqX</td>
+                                    <td>454425.1918123.1918126.1918136.1918138.1918144.2051907</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcSurfaceFeature</td>
+                                    <td>LINEMARKING</td>
+                                    <td>road - line marking</td>
+                                    <td>Clear and precise line markings, guiding traffic safely.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>3SstlkwwP25gbEsTjECubM</td>
+                                    <td>454425.1918123.1918126.1918136.1918138.1918144.2051908</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcSurfaceFeature</td>
+                                    <td>LINEMARKING</td>
+                                    <td>road - line marking</td>
+                                    <td>Clear and precise line markings, guiding traffic safely.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>0foyckKPj2OwIIYCa8mzqS</td>
+                                    <td>454425.1918123.1918126.1918136.1918138.1918144.2051909</td>
+                                </tr>
+                                <tr>
+                                    <td>IfcSurfaceFeature</td>
+                                    <td>LINEMARKING</td>
+                                    <td>road - line marking</td>
+                                    <td>Clear and precise line markings, guiding traffic safely.</td>
+                                    <td>The required property set does not exist</td>
+                                    <td>1Fxh8JXAj0VPU5VkvOYvkk</td>
+                                    <td>454425.1918123.1918126.1918136.1918138.1918144.2051910</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </details>
+                </li>
+            </ol>
+        </div>
+    </section>
+    <hr>
+    <footer>
+        <p>
+            Report by the <a href="https://bonsaibim.org/">Bonsai</a> and <a href="http://ifcopenshell.org/">IfcOpenShell</a>.
+        </p>
+    </footer>
+</body>
+</html>
